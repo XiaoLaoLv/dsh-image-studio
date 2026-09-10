@@ -21,13 +21,17 @@ A full image workbench plugin for DeepSeek Harness: text-to-image, image-to-imag
 CLI 版（`dsh web`）：
 
 ```bat
+:: 从 npm 安装（发布后可用）
 dsh plugin --profile web add dsh-image-studio
+
+:: 或直接从 GitHub 安装
+dsh plugin --profile web add github:XiaoLaoLv/dsh-image-studio
 ```
 
-本地开发版（从本仓库目录直接安装）：
+本地开发（clone 仓库后以活链接安装，改代码无需重装）：
 
 ```bat
-git clone https://github.com/<you>/dsh-image-studio.git
+git clone https://github.com/XiaoLaoLv/dsh-image-studio.git
 dsh plugin --profile web add .\dsh-image-studio
 ```
 
