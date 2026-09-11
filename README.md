@@ -1,14 +1,14 @@
 # dsh-image-studio
 
-DeepSeek Harness 图片工作台插件：文生图、图生图（最多 4 张参考图）、Canvas 编辑（缩放/两段式裁剪/旋转/滤镜/撤销）、图片压缩、一键发送到当前对话输入框。**零构建**，标准 dsh bundle，一条命令安装。
+DeepSeek Harness 图片工作台插件：文生图、图生图（最多 4 张参考图）、Canvas 编辑（滚轮缩放/拖拽平移/两段式裁剪/旋转/滤镜/撤销）、图片压缩、一键发送到当前对话输入框，消息流图片可一键进编辑器。**零构建**，标准 dsh bundle，一条命令安装。
 
-A full image workbench plugin for DeepSeek Harness: text-to-image, image-to-image (up to 4 reference images), canvas editing (zoom, two-phase crop with handles + mask, rotate, flip, filters, undo), image compression with a live size estimate, and one-click send-to-composer. **Zero build** — a standard dsh bundle.
+A full image workbench plugin for DeepSeek Harness: text-to-image, image-to-image (up to 4 reference images), canvas editing (wheel zoom, drag-to-pan, two-phase crop with handles + mask, rotate, flip, filters, undo), image compression with a live size estimate, one-click send-to-composer, and one-click message-image editing. **Zero build** — a standard dsh bundle.
 
 ## 功能 / Features
 
 - **文生图** — 提示词 + 尺寸，走你自己的图像 API
 - **图生图** — 最多 4 张参考图（多选上传、逐张移除）；火山方舟走 `image` 数组，OpenAI 兼容走 multipart `image[]`
-- **编辑器** — 缩放（20%–800% + 适应窗口）、两段式裁剪（进入裁剪模式后画框，8 把手调整 + 蒙版，确认生效）、旋转/翻转、6 种滤镜、撤销/重做
+- **编辑器** — 滚轮缩放（光标锚定，20%–800%）+ 放大后抓手拖拽平移、适应窗口、两段式裁剪（进入裁剪模式后画框，8 把手调整 + 蒙版，确认生效）、旋转/翻转、6 种滤镜、撤销/重做
 - **图片压缩** — 格式（JPEG/WebP/PNG）+ 质量 + 最长边，实时显示压缩后大小；下载与发送均按压缩设置输出
 - **发送到对话** — 当前图（含编辑结果）作为草稿附件附到当前会话输入框
 - **消息图片直达编辑** — 接管消息流图片预览（`conversation.message.images` 槽位）：点击缩略图放大预览，预览中一键「在图像工坊中编辑」，图片直接载入编辑器画布
@@ -59,7 +59,8 @@ lib/index.js    Node 半区：POST /api/image-studio/generate（服务端 fetch 
                 支持 JSON 与 multipart 两种方言）；注册 image-studio 设置命名
                 空间（schemastery schema），生成时读取配置
 lib/client.js   浏览器半区（module-table bundle，手写无构建）：
-                sidebar 入口 + 全屏浮层工作台 + 设置→插件的配置卡片 + 输入框桥接
+                sidebar 入口 + 全屏浮层工作台 + 设置→插件的配置卡片
+                + 消息图片预览接管（缩略图/灯箱/直达编辑）+ 输入框桥接
 ```
 
 浏览器半区通过 `ctx.slots` 注册到官方插槽；client→host 调用走本插件自己的 `/api/image-studio/*` 认证路由（`connection.fetch.register`，与会话日志导出插件同一机制）。编辑、压缩、缩放全部在浏览器 Canvas 本地完成，不经过任何服务端。
