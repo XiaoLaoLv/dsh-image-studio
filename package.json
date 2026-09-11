@@ -1,7 +1,7 @@
 {
   "name": "dsh-image-studio",
-  "version": "0.1.0",
-  "description": "DeepSeek Harness image workbench: text-to-image, image-to-image (up to 4 reference images), canvas editing (zoom, crop, rotate, filters), compression, and send-to-composer. Zero dependencies, zero build.",
+  "version": "0.2.0",
+  "description": "DeepSeek Harness image workbench: text-to-image, image-to-image (up to 4 reference images), canvas editing (zoom, crop, rotate, filters), compression, and send-to-composer. Config lives in the user-settings document; zero build.",
   "type": "module",
   "exports": {
     ".": "./lib/index.js",
@@ -14,6 +14,9 @@
     "README.md",
     "LICENSE"
   ],
+  "dependencies": {
+    "@deepseek-ai/schemastery": "^3.18.2"
+  },
   "dsh": {
     "bundle": {
       "patch": "./cordis.patch.yml"
