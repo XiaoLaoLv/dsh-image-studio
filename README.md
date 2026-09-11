@@ -11,6 +11,7 @@ A full image workbench plugin for DeepSeek Harness: text-to-image, image-to-imag
 - **编辑器** — 缩放（20%–800% + 适应窗口）、两段式裁剪（进入裁剪模式后画框，8 把手调整 + 蒙版，确认生效）、旋转/翻转、6 种滤镜、撤销/重做
 - **图片压缩** — 格式（JPEG/WebP/PNG）+ 质量 + 最长边，实时显示压缩后大小；下载与发送均按压缩设置输出
 - **发送到对话** — 当前图（含编辑结果）作为草稿附件附到当前会话输入框
+- **消息图片直达编辑** — 接管消息流图片预览（`conversation.message.images` 槽位）：点击缩略图放大预览，预览中一键「在图像工坊中编辑」，图片直接载入编辑器画布
 - **配置持久化** — 接口风格/地址/密钥/模型/尺寸保存在 DSH 用户设置文档的 `image-studio` 命名空间，在 **设置 → 插件** 的插件卡片中编辑，重启后自动恢复
 - **演示模式** — 未配置 API Key 时本地生成示意图，完整走通流程
 
@@ -49,7 +50,7 @@ dsh plugin --profile web add .\dsh-image-studio
 
 ## 兼容性 / Compatibility
 
-构建针对 DeepSeek Harness `0.1.x` 线（本仓库开发时的本地构建为 `0.1.1-alpha.x`）。插件只使用稳定面：`connection.fetch` 路由、`sidebar.footer.action` / `shell.overlay` / `settings.plugin.item` / `conversation.composer.dock` 插槽、`locale` / `timer` / `settingsScope` 服务、`settings` 命名空间注册。Harness 升级若调整了这些面，需要同步适配。
+构建针对 DeepSeek Harness `0.1.x` 线（本仓库开发时的本地构建为 `0.1.1-alpha.x`）。插件只使用稳定面：`connection.fetch` 路由、`sidebar.footer.action` / `shell.overlay` / `settings.plugin.item` / `conversation.message.images`（替换消息图片渲染） / `conversation.composer.dock` 插槽、`locale` / `timer` / `settingsScope` 服务、`settings` 命名空间注册。Harness 升级若调整了这些面，需要同步适配。
 
 ## 工作原理 / How it works
 
